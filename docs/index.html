@@ -25,7 +25,7 @@
                             <a class="nav-link active" aria-current="page" href="#">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Documentación</a>
+                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#doc">Documento</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Equipo</a>
@@ -58,6 +58,7 @@
             <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                 <button type="button" data-bs-toggle="collapse" data-bs-target="#use-case" class="btn btn-dark">Caso de uso</button>
                 <button type="button" data-bs-toggle="collapse" data-bs-target="#clases" class="btn btn-dark">Clases</button>
+                <button type="button" data-bs-toggle="collapse" data-bs-target="#pt" class="btn btn-dark">PacketTracer</button>
 
                 <div class="btn-group" role="group">
                     <button id="btnGroupDrop1" type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -80,6 +81,26 @@
             </div>
             <div class="collapse" id="clases">
                 <div class="card card-body"><img src="./img/diagramas/DiagramaDeClases.svg" alt=""></div>
+            </div>
+            <div class="collapse" id="pt">
+                <div class="card card-body"><img src="./img/diagramas/PacketTracer.jpg" alt=""></div>
+            </div>
+        </section>
+    </div>
+    <div>
+        <section>
+            <div class="modal fade" id="doc" tabindex="-1" aria-labelledby="docLabel" aria-hidden="true">
+                <div class="modal-dialog modal-fullscreen">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Documento</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <embed src="./src/ProyectoUML_Grupo7.pdf" type="text/pdf" width="100%" height="500px">
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
