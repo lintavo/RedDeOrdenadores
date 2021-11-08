@@ -180,26 +180,26 @@ var grpLaunchers;
 var pause, pause_, play, play_, fast, fast_;
 
 function preload() {
-    game.load.image('imac', './img/imac.png');
-    game.load.image('iphone-1', './img/iphone-1.png');
-    game.load.image('macbook', './img/macbook.png');
-    game.load.image('monitor', './img/monitor.png');
-    game.load.image('packet', './img/circle.png');
-    game.load.image('server', './img/server.png');
-    game.load.image('router', './img/router.png');
+    game.load.image('imac', 'img/imac.png');
+    game.load.image('iphone-1', 'img/iphone-1.png');
+    game.load.image('macbook', 'img/macbook.png');
+    game.load.image('monitor', 'img/monitor.png');
+    game.load.image('packet', 'img/circle.png');
+    game.load.image('server', 'img/server.png');
+    game.load.image('router', 'img/router.png');
 
-    game.load.image('reset', '../img/ui/reset.png');
-    game.load.image('pause', '../img/ui/pause.png');
-    game.load.image('pause_', '../img/ui/pause_grey.png');
-    game.load.image('play', '../img/ui/play.png');
-    game.load.image('play_', '../img/ui/play_grey.png');
-    game.load.image('fast', '../img/ui/fast.png');
-    game.load.image('fast_', '../img/ui/fast_grey.png');
-    game.load.image('edit', '../img/ui/tabs.png');
-    game.load.image('launch', '../img/ui/launch.png');
-    game.load.image('add', '../img/ui/add.png');
+    game.load.image('reset', 'img/ui/reset.png');
+    game.load.image('pause', 'img/ui/pause.png');
+    game.load.image('pause_', 'img/ui/pause_grey.png');
+    game.load.image('play', 'img/ui/play.png');
+    game.load.image('play_', 'img/ui/play_grey.png');
+    game.load.image('fast', 'img/ui/fast.png');
+    game.load.image('fast_', 'img/ui/fast_grey.png');
+    game.load.image('edit', 'img/ui/tabs.png');
+    game.load.image('launch', 'img/ui/launch.png');
+    game.load.image('add', 'img/ui/add.png');
 
-    for (var i = 0; i <= 6; i++) game.load.image('meter-' + i, '../img/ui/meter-' + i + '.png');
+    for (var i = 0; i <= 6; i++) game.load.image('meter-' + i, 'img/ui/meter-' + i + '.png');
 }
 
 function create() {
