@@ -8,7 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./css/jquery-ui.min.css">
     <title>Red de Ordenadores</title>
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="./js/jquery-ui.min.js"></script>
+    <script src="./js/phaser.min.js"></script>
+    <script src="./js/ui.js"></script>
+    <script src="./js/bindings.js"></script>
+    <script src="./js/devicescripts.js"></script>
 </head>
 
 <body>
@@ -32,11 +39,11 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Diagramas
+                                    Aprendizaje
                                 </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Ping</a></li>
+                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#route">Enrutamiento</a></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>
@@ -93,11 +100,516 @@
                 <div class="modal-dialog modal-fullscreen">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Documento</h5>
+                            <h5 class="modal-title" id="docModalLabel">Documento</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <embed src="./src/ProyectoUML_Grupo7.pdf" type="text/pdf" width="100%" height="500px">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div>
+        <section>
+            <script>
+                var DEFAULT_GAMESPEED = 3;
+
+                var levelid = 4;
+                var level = {
+                    devices: [{
+                        id: "Alice",
+                        ports: 1,
+                        x: 0.5,
+                        y: 0.1,
+                        player: true,
+                        image: "imac"
+                    }, {
+                        id: "Bob",
+                        ports: 1,
+                        x: 0.25,
+                        y: 0.75,
+                        image: "imac",
+                        player: true
+                    }, {
+                        id: "Carol",
+                        ports: 1,
+                        x: 0.75,
+                        y: 0.75,
+                        image: "imac",
+                        player: true
+                    }, {
+                        id: "Router 1",
+                        ports: 3,
+                        x: 0.5,
+                        y: 0.3,
+                        image: "server",
+                        script: deviceScripts.manualRouter,
+                        rules: [{
+                            dstip: "Alice",
+                            portNum: 0
+                        }, {
+                            dstip: "Bob",
+                            portNum: 1
+                        }, {
+                            dstip: "Carol",
+                            portNum: 2
+                        }]
+                    }, {
+                        id: "Router 2",
+                        type: "ManualRouter",
+                        ports: 3,
+                        x: 0.35,
+                        y: 0.5,
+                        image: "server",
+                        script: deviceScripts.manualRouter,
+                        rules: [{
+                            dstip: "Bob",
+                            portNum: 0
+                        }, {
+                            dstip: "Alice",
+                            portNum: 1
+                        }, {
+                            dstip: "Carol",
+                            portNum: 2
+                        }]
+                    }, {
+                        id: "Router 3",
+                        type: "ManualRouter",
+                        ports: 3,
+                        x: 0.65,
+                        y: 0.5,
+                        image: "server",
+                        script: deviceScripts.manualRouter,
+                        rules: [{
+                            dstip: "Carol",
+                            portNum: 0
+                        }, {
+                            dstip: "Alice",
+                            portNum: 1
+                        }, {
+                            dstip: "Bob",
+                            portNum: 2
+                        }]
+                    }],
+                    links: [{
+                        src: "Alice",
+                        srcport: 0,
+                        dst: "Router 1",
+                        dstport: 0
+                    }, {
+                        src: "Bob",
+                        srcport: 0,
+                        dst: "Router 2",
+                        dstport: 0
+                    }, {
+                        src: "Carol",
+                        srcport: 0,
+                        dst: "Router 3",
+                        dstport: 0
+                    }, {
+                        src: "Router 1",
+                        srcport: 1,
+                        dst: "Router 2",
+                        dstport: 1
+                    }, {
+                        src: "Router 1",
+                        srcport: 2,
+                        dst: "Router 3",
+                        dstport: 1
+                    }, {
+                        src: "Router 2",
+                        srcport: 2,
+                        dst: "Router 3",
+                        dstport: 2
+                    }],
+                    timeline: [{
+                        type: "packet",
+                        at: 50,
+                        from: "Alice",
+                        payload: {
+                            network: {
+                                dstip: "Bob",
+                                srcip: "Alice"
+                            }
+                        }
+                    }, {
+                        type: "packet",
+                        at: 150,
+                        from: "Bob",
+                        payload: {
+                            network: {
+                                dstip: "Alice",
+                                srcip: "Bob"
+                            }
+                        }
+                    }, {
+                        type: "packet",
+                        at: 210,
+                        from: "Alice",
+                        payload: {
+                            network: {
+                                dstip: "Carol",
+                                srcip: "Alice"
+                            }
+                        }
+                    }, {
+                        type: "packet",
+                        at: 270,
+                        from: "Carol",
+                        payload: {
+                            network: {
+                                dstip: "Bob",
+                                srcip: "Carol"
+                            }
+                        }
+                    }],
+                    triggers: [{
+                        type: "packet",
+                        device: "Carol",
+                        payload: {
+                            network: {
+                                srcip: "Bob",
+                                dstip: "Carol"
+                            }
+                        }
+                    }],
+                    nextLevel: 5
+                };
+                var devices = {};
+                var playerPackets = [];
+
+                var packetFields = [{
+                    layer: "network",
+                    fields: [
+                        "srcip", "dstip"
+                    ]
+                }, {
+                    layer: "transport",
+                    fields: [
+                        "proto", "ttl"
+                    ]
+                }, {
+                    layer: "application",
+                    fields: [
+                        "type", "key"
+                    ]
+                }];
+
+                var vpWidth = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+                var vpHeight = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
+
+                var game = new Phaser.Game(vpWidth, vpHeight, Phaser.AUTO, 'game', {
+                    preload: preload,
+                    create: create,
+                    update: update
+                });
+                var grpPackets;
+                var grpDevices;
+                var grpLaunchers;
+                var pause, pause_, play, play_, fast, fast_;
+
+                function preload() {
+                    game.load.image('imac', 'img/imac.png');
+                    game.load.image('iphone-1', 'img/iphone-1.png');
+                    game.load.image('macbook', 'img/macbook.png');
+                    game.load.image('monitor', 'img/monitor.png');
+                    game.load.image('packet', 'img/circle.png');
+                    game.load.image('server', 'img/server.png');
+                    game.load.image('router', 'img/router.png');
+
+                    game.load.image('reset', 'img/ui/reset.png');
+                    game.load.image('pause', 'img/ui/pause.png');
+                    game.load.image('pause_', 'img/ui/pause_grey.png');
+                    game.load.image('play', 'img/ui/play.png');
+                    game.load.image('play_', 'img/ui/play_grey.png');
+                    game.load.image('fast', 'img/ui/fast.png');
+                    game.load.image('fast_', 'img/ui/fast_grey.png');
+                    game.load.image('edit', 'img/ui/tabs.png');
+                    game.load.image('launch', 'img/ui/launch.png');
+                    game.load.image('add', 'img/ui/add.png');
+
+                    for (var i = 0; i <= 6; i++) game.load.image('meter-' + i, 'img/ui/meter-' + i + '.png');
+                }
+
+                function create() {
+                    game.stage.backgroundColor = 0xDDDDDD;
+                    grpDevices = game.add.group();
+                    grpPackets = game.add.group();
+                    grpLaunchers = game.add.group();
+                    document.getElementById('pane').style.left = (vpWidth * 0.7) + 'px';
+                    document.getElementById('pane').style.width = (vpWidth * 0.3 - 40) + 'px';
+                    document.getElementById('pane').style.height = (vpHeight - 40) + 'px';
+
+                    pause = game.add.sprite(80, 20, 'pause');
+                    play = game.add.sprite(140, 20, 'play');
+                    fast = game.add.sprite(200, 20, 'fast');
+
+                    game.add.button(20, 20, 'reset', btnReset);
+                    pause_ = game.add.button(80, 20, 'pause_', btnPause);
+                    play_ = game.add.button(140, 20, 'play_', btnPlay);
+                    fast_ = game.add.button(200, 20, 'fast_', btnFast);
+                    createLaunchers();
+
+                    fast_.visible = false;
+
+                    for (var i = 0; i < level.devices.length; i++) {
+                        var devSprite = grpDevices.create(0.7 * game.world.width * level.devices[i].x, game.world.height * level.devices[i].y, level.devices[i].image || 'imac');
+                        level.devices[i].sprite = devSprite;
+                        if (level.devices[i].hasOwnProperty("capacity")) {
+                            level.devices[i].capsprite = grpDevices.create(0.7 * game.world.width * level.devices[i].x + 128, game.world.height * level.devices[i].y, 'meter-0');
+                        }
+                        devices[level.devices[i].id] = level.devices[i];
+                        devices[level.devices[i].id].ports = [];
+                        devices[level.devices[i].id].locked = false;
+                        devSprite.inputEnabled = true;
+                        devSprite.events.onInputDown.add(onDeviceClick, level.devices[i]);
+                    }
+
+                    var graphics = game.add.graphics(0, 0);
+                    graphics.lineStyle(1, 0, 0);
+                    graphics.lineTo(1, 1);
+                    graphics.lineStyle(1, 0x000000, 1);
+
+                    for (var i = 0; i < level.links.length; i++) {
+                        var src = devices[level.links[i].src];
+                        var dst = devices[level.links[i].dst];
+                        src.ports[level.links[i].srcport] = dst.id;
+                        dst.ports[level.links[i].dstport] = src.id;
+                        graphics.moveTo(src.sprite.centerX, src.sprite.centerY);
+                        graphics.lineTo(dst.sprite.centerX, dst.sprite.centerY);
+                    }
+
+                    var meshSprite = game.add.sprite(0, 0, graphics.generateTexture());
+                    meshSprite.sendToBack();
+                    graphics.destroy();
+
+                    if (!level.hasOwnProperty("triggers")) level.triggers = [];
+
+                    $("#loading").hide();
+
+                    game.input.keyboard.onPressCallback = function(e) {
+                        if (e == " ") {
+                            if (game.paused) {
+                                if (game.time.slowMotion == 1) btnFast();
+                                else btnPlay();
+                            } else btnPause();
+                        }
+                    };
+                    loadPlayerPackets();
+                    btnReset();
+                }
+
+                function initEvents() {
+                    for (var i = 0; i < level.timeline.length; i++) {
+                        game.time.events.add(level.timeline[i].at * 3, playPacket, level.timeline[i]);
+                    }
+                }
+
+                function playPacket() {
+                    doPacketAnimation(this.from, getDefaultRecipient(this.from), this.payload);
+                }
+
+                function getDefaultRecipient(from) {
+                    for (var i = 0; i < level.links.length; i++) {
+                        if (level.links[i].src == from) return level.links[i].dst;
+                        else if (level.links[i].dst == from) return level.links[i].src;
+                    }
+                    return null;
+                }
+
+                function getPortRecipient(from, portNum) {
+                    for (var i = 0; i < level.links.length; i++) {
+                        if (level.links[i].src == from && level.links[i].srcport == portNum) return level.links[i].dst;
+                        if (level.links[i].dst == from && level.links[i].dstport == portNum) return level.links[i].src;
+                    }
+                    return null;
+
+                }
+
+                // WARNING: this should only be called by the animator
+                // devicescripts should not be able to access it
+                function getRemotePort(src, dst) {
+                    for (var i = 0; i < level.links.length; i++) {
+                        if (level.links[i].src == src && level.links[i].dst == dst) return level.links[i].dstport;
+                        if (level.links[i].src == dst && level.links[i].dst == src) return level.links[i].srcport;
+                    }
+                }
+
+                function update() {
+                    //todo: separate out the meter-X updates from satisfiesTrigger
+                    for (var i = 0; i < level.triggers.length; i++) {
+                        if (level.triggers[i].type == "flood") {
+                            satisfiesTrigger({
+                                dst: level.triggers[i].device
+                            }, {
+                                type: "flood",
+                                device: level.triggers[i].device,
+                                noup: true
+                            });
+                        }
+                    }
+                }
+
+                var levelOver = false;
+
+                function donePacket() {
+                    this.kill();
+                    var youWin = true;
+
+                    for (var i = 0; i < level.triggers.length; i++) {
+                        if (satisfiesTrigger(this, level.triggers[i])) {
+                            if (level.triggers[i].hasOwnProperty("times")) {
+                                if (--level.triggers[i].times <= 0) level.triggers[i].completed = true;
+                            } else level.triggers[i].completed = true;
+                        }
+
+                        if (!level.triggers[i].hasOwnProperty("completed")) youWin = false;
+                    }
+
+                    if (!levelOver && youWin) {
+                        levelOver = true;
+                        $.get("./solns.ajax.php?level=" + levelid + "&method=win");
+                        $("#winner").dialog({
+                            title: "You win!",
+                            resizable: false,
+                            modal: true,
+                            buttons: [{
+                                text: "Go to the next level",
+                                click: function() {
+                                    location.href = "./?level=" + level.nextLevel;
+                                }
+                            }]
+                        });
+                    }
+
+                    if (devices[this.dst].hasOwnProperty("script")) {
+                        devices[this.dst].script.onPacketReceived(devices[this.dst], this.payload, this.portNum);
+                    }
+                }
+
+                function satisfiesTrigger(pkt, t) {
+                    if (pkt.dst != t.device) return false;
+
+                    if (t.type == "packet") {
+                        if (!t.hasOwnProperty("payload") && !t.hasOwnProperty("times")) return true;
+                        if (!pkt.hasOwnProperty("payload")) return false;
+
+                        var layers = t.hasOwnProperty("payload") ? Object.keys(t.payload) : [];
+                        for (var i = 0; i < layers.length; i++) {
+                            if (!pkt.payload.hasOwnProperty(layers[i])) return false;
+
+                            var fields = Object.keys(t.payload[layers[i]]);
+                            for (var j = 0; j < fields.length; j++) {
+                                if (!pkt.payload[layers[i]].hasOwnProperty(fields[j])) return false;
+                                if (pkt.payload[layers[i]][fields[j]].trim().toLowerCase() != t.payload[layers[i]][fields[j]].trim().toLowerCase()) return false;
+                            }
+                        }
+
+                        return true;
+                    } else if (t.type == "flood") {
+                        if (!devices[t.device].hasOwnProperty("floodCounter")) {
+                            devices[t.device].floodCounter = 0;
+                            devices[t.device].floodLast = 0;
+                        }
+
+                        var delta = game.time.events.ms - devices[t.device].floodLast;
+                        if (t.noup && devices[t.device].floodCounter > 0) {
+                            if (delta > 200) {
+                                devices[t.device].floodCounter--;
+                                devices[t.device].floodLast = game.time.events.ms;
+                            }
+                        } else if (delta < 120 / devices[t.device].capacity) {
+                            devices[t.device].floodCounter++;
+                            if (devices[t.device].floodCounter > 30) devices[t.device].floodCounter = 30;
+                        } else {
+                            devices[t.device].floodCounter -= Math.floor(delta / (120 / devices[t.device].capacity));
+                            if (devices[t.device].floodCounter < 0) devices[t.device].floodCounter = 0;
+                        }
+
+                        if (!t.noup) devices[t.device].floodLast = game.time.events.ms;
+                        devices[t.device].capsprite.loadTexture('meter-' + Math.floor(devices[t.device].floodCounter / 5));
+
+                        return devices[t.device].floodCounter == 30;
+                    } else {
+                        console.log("unknown trigger type: " + t.type);
+                        return false;
+                    }
+                }
+            </script>
+            <div class="modal fade" id="route" tabindex="-1" aria-labelledby="routeLabel" aria-hidden="true">
+                <div class="modal-dialog modal-fullscreen">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Enrutamiento</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="game" style="float:left"></div>
+
+                            <div id="pane" style="position:absolute;padding:20px;overflow:auto;">
+                                <h1>Enrutamiento</h1>
+
+                                <input type="button" value="Level list" onclick="location.href='./'">
+
+                                <div id="leveldescrip" style="overflow:auto;">
+
+                                    <p>
+                                        Por lo general, las computadoras no están conectadas directamente, pero se puede acceder a ellas a través de una serie de <strong>enrutadores</strong>. Un enrutador funciona de manera muy similar a una oficina postal.
+                                        Cuando recibe un <strong>paquete</strong>, mira el destino y determina en qué ruta enviarlo. Por lo general, eligen la ruta más cercana a la computadora de destino. Realizan un seguimiento de todas sus rutas en
+                                        una <strong>tabla de enrutamiento</strong>.
+                                    </p>
+                                    <p>
+                                        Pause la simulación y mire uno de los paquetes. Contiene solo los encabezados srcip y dstip que vimos en los niveles anteriores. No hay información adicional para decirles a los enrutadores cómo enviar el paquete. En cambio, esta información se almacena
+                                        en la tabla de enrutamiento del enrutador.
+                                    </p>
+                                    <p>Ejercicio, envíe un paquete de la computadora de Bob a la computadora de Carol.</p>
+
+                                    <h3>Objetivo del ejercicio</h3>
+
+                                    <ul>
+                                        <li>Envía un paquete de <strong>Bob</strong> a <strong>Carol</strong></li>
+                                    </ul>
+                                </div>
+
+                                <input type="button" id="subpane_close" style="display:none" value="Información del ejercicio" onclick="onSubpaneClose()">
+                                <div id="subpane" style="display:none"></div>
+                            </div>
+
+                            <div id="editor" style="display:none;">
+                                Sent from:
+                                <select id="pktFrom">
+		<option>Alice</option>
+		<option>Bob</option>
+		<option>Carol</option>
+	</select><br>
+                                <fieldset>
+                                    <legend>Network Layer</legend>
+                                    srcip: <input type="text" id="srcip"></input><br> dstip: <input type="text" id="dstip"></input>
+                                </fieldset>
+                                <fieldset>
+                                    <legend>Transport Layer</legend>
+                                    payload: <input type="text" id="payload"></input><br> proto: <input type="text" id="other"></input>
+                                </fieldset>
+                            </div>
+
+                            <div id="winner" style="display:none;">
+                                <p>You won the level! Congrats!</p>
+                            </div>
+
+                            <!-- <div id="footer" style="position:absolute;bottom:0.5em;right:0.5em;font-size:0.5em">
+                                created by
+                                <a href="https://erinn.io/">erinn atwater</a> and
+                                <a href="https://cs.uwaterloo.ca/~cbocovic">cecylia bocovich</a> | device images designed by
+                                <a href="http://www.flaticon.com/authors/madebyoliver">madebyoliver</a> from Flaticon
+                            </div> -->
+
+                            <div id="loading" style="position:absolute;top:0;left:0;right:0;bottom:0;background-color:#DDD;color:#222;text-align:center">
+                                <h2>Netsim</h3>
+                                    <p>Loading...
+                                        <p>
+                            </div>
                         </div>
                     </div>
                 </div>
