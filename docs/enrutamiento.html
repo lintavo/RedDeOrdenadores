@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="./css/jquery-ui.min.css">
     <title>Ejercicio - Enrutamiento</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-    <script src="./js/phaser.min.js"></script>
+    <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script> -->
+    <script src="./js/jquery-ui.min.js"></script>
+    <script src="./js/phaser2.min.js"></script>
     <script src="./js/ui.js">
         < /scri> <
         script src = "./js/bindings.js" >
@@ -227,26 +228,26 @@
         var pause, pause_, play, play_, fast, fast_;
 
         function preload() {
-            game.load.image('imac', './includes/imac.png');
-            game.load.image('iphone-1', './includes/iphone-1.png');
-            game.load.image('macbook', './includes/macbook.png');
-            game.load.image('monitor', './includes/monitor.png');
-            game.load.image('packet', './includes/circle.png');
-            game.load.image('server', './includes/server.png');
-            game.load.image('router', './includes/router.png');
+            game.load.image('imac', 'includes/imac.png');
+            game.load.image('iphone-1', 'includes/iphone-1.png');
+            game.load.image('macbook', 'includes/macbook.png');
+            game.load.image('monitor', 'includes/monitor.png');
+            game.load.image('packet', 'includes/circle.png');
+            game.load.image('server', 'includes/server.png');
+            game.load.image('router', 'includes/router.png');
 
-            game.load.image('reset', './includes/ui/reset.png');
-            game.load.image('pause', './includes/ui/pause.png');
-            game.load.image('pause_', './includes/ui/pause_grey.png');
-            game.load.image('play', './includes/ui/play.png');
-            game.load.image('play_', './includes/ui/play_grey.png');
-            game.load.image('fast', './includes/ui/fast.png');
-            game.load.image('fast_', './includes/ui/fast_grey.png');
-            game.load.image('edit', './includes/ui/tabs.png');
-            game.load.image('launch', './includes/ui/launch.png');
-            game.load.image('add', './includes/ui/add.png');
+            game.load.image('reset', 'includes/ui/reset.png');
+            game.load.image('pause', 'includes/ui/pause.png');
+            game.load.image('pause_', 'includes/ui/pause_grey.png');
+            game.load.image('play', 'includes/ui/play.png');
+            game.load.image('play_', 'includes/ui/play_grey.png');
+            game.load.image('fast', 'includes/ui/fast.png');
+            game.load.image('fast_', 'includes/ui/fast_grey.png');
+            game.load.image('edit', 'includes/ui/tabs.png');
+            game.load.image('launch', 'includes/ui/launch.png');
+            game.load.image('add', 'includes/ui/add.png');
 
-            for (var i = 0; i <= 6; i++) game.load.image('meter-' + i, './includes/ui/meter-' + i + '.png');
+            for (var i = 0; i <= 6; i++) game.load.image('meter-' + i, 'includes/ui/meter-' + i + '.png');
         }
 
         function create() {
