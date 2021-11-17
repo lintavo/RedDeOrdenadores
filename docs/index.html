@@ -48,46 +48,76 @@
     <div>
         <section class="text-center col-lg-12">
             <h2>Diagramas</h2>
-            <div class="card card-info card-body">
+            <!-- <div class="card card-info card-body">
                 <p>Presione un botón para ver aparecer y desaparecer un diagrama.</p>
-            </div>
-        </section>
-    </div><br>
-    <div class="text-center">
-        <section class="col-lg-12">
-            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                <button type="button" data-bs-toggle="collapse" data-bs-target="#use-case" class="btn btn-dark">Caso de uso</button>
-                <button type="button" data-bs-toggle="collapse" data-bs-target="#clases" class="btn btn-dark">Clases</button>
-                <button type="button" data-bs-toggle="collapse" data-bs-target="#er" class="btn btn-dark">ER</button>
-                <button type="button" data-bs-toggle="collapse" data-bs-target="#pt" class="btn btn-dark">PacketTracer</button>
-
-                <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        Secuencias
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <li><a class="dropdown-item" href="#">1</a></li>
-                        <li><a class="dropdown-item" href="#">2</a></li>
-                    </ul>
-                </div>
-            </div>
+            </div> -->
         </section>
     </div>
     <div>
-        <section>
-            <div class="collapse" id="use-case">
-                <div class="card card-body">
-                    <img src="./img/diagramas/DiagramaCasosDeUso.svg" alt="" srcset="">
+        <section class="m-2">
+            <div class="accordion" id="accordionDiagrams">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingZero">
+                        <button class="accordion-button collapsed btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseZero" aria-expanded="false" aria-controls="collapseZero">
+                            <i class="bi bi-hdd-network"></i>&nbsp;Diagrama de casos de uso
+                        </button>
+                    </h2>
+                    <div id="collapseZero" class="accordion-collapse collapse" aria-labelledby="headingZero" data-bs-parent="#accordionDiagrams">
+                        <div class="accordion-body">
+                            <div class="card card-body"><img src="./img/diagramas/DiagramaCasosDeUso.svg" alt=""></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="collapse" id="clases">
-                <div class="card card-body"><img src="./img/diagramas/DiagramaDeClases.svg" alt=""></div>
-            </div>
-            <div class="collapse" id="er">
-                <div class="card card-body"><img src="./img/diagramas/DiagramaER.svg" alt=""></div>
-            </div>
-            <div class="collapse" id="pt">
-                <div class="card card-body"><img src="./img/diagramas/ModeloPT.svg" alt=""></div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <i class="bi bi-hdd-network"></i>&nbsp;Diagrama de clases
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionDiagrams">
+                        <div class="accordion-body">
+                            <div class="card card-body"><img src="./img/diagramas/DiagramaDeClases.svg" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <i class="bi bi-hdd-network"></i>&nbsp;Diagrama ER
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionDiagrams">
+                        <div class="accordion-body">
+                            <div class="card card-body"><img src="./img/diagramas/DiagramaER.svg" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <i class="bi bi-hdd-network"></i>&nbsp;Modelo en Packet Tracer
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionDiagrams">
+                        <div class="accordion-body">
+                            <div class="card card-body"><img src="./img/diagramas/ModeloPT.svg" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <i class="bi bi-file-play"></i>&nbsp;Video Simulación en Packet Tracer
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionDiagrams">
+                        <div class="accordion-body">
+                            <div class="card card-body">
+                                <iframe width="100%" height="515" src="https://www.youtube-nocookie.com/embed/d4DRxiPSw_o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
