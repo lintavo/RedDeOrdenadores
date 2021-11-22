@@ -1,4 +1,4 @@
-# RedDeOrdenadores.
+# Red de Ordenadores.
 
 -------
 
@@ -10,8 +10,8 @@
 
 ## Tecnologías utilizadas.
 
-* UML 2.0
-* BPMN.
+* UML v2.5
+* BPMN v2.0.
 * Git.
 * HTML.
 * Java.
@@ -30,3 +30,13 @@
 
 -------------------
 
+## Referencias.
+
+- Cisco Packet Tracer [web](https://www.netacad.com/courses/packet-tracer).
+- StarUML [web](https://staruml.io).
+  - ColorExtension [web](https://staruml.io).
+  - Generate Getters and Setters [web](https://github.com/niklauslee/staruml-gettersetter).
+- Camunda Modeler [web](https://camunda.com/products/camunda-platform/modeler/).
+- Portal educativo UML [web](https://www.uml.edu).
+- Sitio Oficial UML [web](https://www.uml.org).
+- Sitio ofical del estándar BPMN [web](https://www.bpmn.org).
